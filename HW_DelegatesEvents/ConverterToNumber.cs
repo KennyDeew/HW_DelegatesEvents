@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Formats.Asn1;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HW_DelegatesEvents
+﻿namespace HW_DelegatesEvents
 {
     public delegate float ConvertToFloatdel<T>(T obj);
-
+    
     public static class ConverterToNumber
     {
-        public static float convertToNumber123<T>(T obj)
+        public static float convertToNumber<T>(T obj) where T : class 
         {
+            if (obj is String strObj && File.Exists(strObj))
+            {
+                FileInfo strFileInfo = new FileInfo(strObj);
+                return strFileInfo.Length;
+            }
             //Конвертируем объект в string и считаем кол-во символов
             float result = (obj.ToString() ?? string.Empty).Length;
             //Считаем все свойства объекта, которые не null
@@ -25,7 +22,7 @@ namespace HW_DelegatesEvents
             //Если есть свойства типа float считаем их
             foreach (var fProperty in objectType.GetProperties().Where(P => P.PropertyType == typeof(float)))
             {
-                if (float.TryParse(fProperty.GetValue(obj).ToString(), out float fresult))
+                if (float.TryParse(fProperty.GetValue(obj)?.ToString(), out float fresult))
                 {
                     result += fresult;
                 }

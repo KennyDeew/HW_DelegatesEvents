@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Collections;
 namespace HW_DelegatesEvents
 {
     public static class CollectionHandler
@@ -28,7 +22,7 @@ namespace HW_DelegatesEvents
             }
             if (maxElement == null)
             {
-                throw new InvalidOperationException("collection does not contains object T");
+                throw new InvalidOperationException("collection does not contains objects");
             }
             return maxElement;
         }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HW_DelegatesEvents
+﻿namespace HW_DelegatesEvents
 {
     public class FileSearcher
     {
@@ -12,26 +6,42 @@ namespace HW_DelegatesEvents
 
         public string[] FilePaths { get; set; }
 
-        public event EventHandler FileFound;
+        public bool StopSearch { get; set; }
+        
+        public event EventHandler FileFoundEvent;
 
         public void OnFileFound(FileArgs e)
         {
-            FileFound?.Invoke(this, e);
+            FileFoundEvent?.Invoke(this, e);
         }
 
         public FileSearcher(string filesDirectory)
         {
+            StopSearch = false;
             FilesDirectory = filesDirectory;
-            FilePaths = GetFiles();
+            if (FilesDirectory != string.Empty)
+            {
+                FilePaths = GetFiles();
+            }
         }
 
         public void StartSearch()
         {
-            foreach (var filePath in FilePaths)
+            int FileNumber = 0;
+            if (FilePaths != null)
             {
-                if (File.Exists(filePath))
+                foreach (var filePath in FilePaths)
                 {
-                    OnFileFound(new FileArgs(filePath));
+                    if (StopSearch)
+                    {
+                        return;
+                    }
+                    if (File.Exists(filePath))
+                    {
+                        OnFileFound(new FileArgs(filePath));
+                        FileNumber++;
+                    }
+                    
                 }
             }
         }
