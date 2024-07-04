@@ -4,9 +4,9 @@
     {
         static void Main(string[] args)
         {
-            string fileSelection = "C:\\Users\\Машина\\Documents\\FileColection";
+            string fileSelection = "C:\\Users\\Машина\\Documents\\FileColection\\";
             //Имя файла при нахождении которого Подписчик события отменяет дальнейший поиск файлов
-            string stopFileName = "C:\\Users\\Машина\\Documents\\FileColection\\3.txt";
+            string stopFileName = fileSelection + "3.txt";
             var fileSearcher = new FileSearcher(fileSelection);
             Subscriber subscriber = new Subscriber(stopFileName);
             fileSearcher.FileFoundEvent += subscriber.Onrecieved;
