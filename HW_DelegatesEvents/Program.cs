@@ -15,13 +15,13 @@
             fileSearcher.FileFoundEvent -= subscriber.Onrecieved;
 
             //Ищем максимальный файл
-            Func<string, float> convertDelegate = ConverterToNumber.convertToNumber;
-            GetMaxFile(fileSearcher.FilePaths, convertDelegate);
+            Func<string, float> convertToFloatDelegate = ConverterToNumber.convertToNumber;
+            GetMaxFile(fileSearcher.FilePathArr, convertToFloatDelegate);
         }
 
-        private static void GetMaxFile(string[] filePaths, Func<string, float> convertDelegate)
+        private static void GetMaxFile(string[] FilePathArr, Func<string, float> convertToFloatDelegate)
         {
-            string maxFilePath = CollectionHandler.GetMax<string>(filePaths, convertDelegate);
+            string maxFilePath = CollectionHandler.GetMax<string>(FilePathArr, convertToFloatDelegate);
             Console.WriteLine($"Max file: {maxFilePath}");
         }
     }

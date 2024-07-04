@@ -4,7 +4,7 @@
     {
         public string FilesDirectory { get; set; }
 
-        public string[] FilePaths { get; set; }
+        public string[] FilePathArr { get; set; }
 
         public bool StopSearch { get; set; }
         
@@ -21,16 +21,16 @@
             FilesDirectory = filesDirectory;
             if (FilesDirectory != string.Empty)
             {
-                FilePaths = GetFiles();
+                FilePathArr = GetFiles();
             }
         }
 
         public void StartSearch()
         {
             int FileNumber = 0;
-            if (FilePaths != null)
+            if (FilePathArr != null)
             {
-                foreach (var filePath in FilePaths)
+                foreach (var filePath in FilePathArr)
                 {
                     if (StopSearch)
                     {
