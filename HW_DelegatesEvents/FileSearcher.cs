@@ -8,7 +8,7 @@
 
         public bool StopSearch { get; set; }
         
-        public event EventHandler FileFoundEvent;
+        public event EventHandler<FileArgs> FileFoundEvent;
 
         public void OnFileFound(FileArgs e)
         {

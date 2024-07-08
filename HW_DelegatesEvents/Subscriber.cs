@@ -9,19 +9,12 @@
             StopFileName = stopFileName;
         }
 
-        public void Onrecieved(object? sender, EventArgs e)
+        public void Onrecieved(object? sender, FileArgs e)
         {
-            if (e is FileArgs fileArgs)
+            Console.WriteLine($"Recieved founded file: {e.FilePath}");
+            if (StopFileName != null && sender is FileSearcher fileSearcher && StopFileName == e.FilePath)
             {
-                Console.WriteLine($"Recieved founded file: {fileArgs.FilePath}");
-                if (StopFileName != null && sender is FileSearcher fileSearcher && StopFileName == fileArgs.FilePath)
-                {
-                    fileSearcher.StopSearch = true;
-                }
-            }
-            else
-            {
-                Console.WriteLine($"Recieved founded file.");
+                fileSearcher.StopSearch = true;
             }
 
         }
